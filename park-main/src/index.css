@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --animate-shimmer: shimmer 1.5s infinite;
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* ===========================
+   BASE BODY
+   =========================== */
+@layer base {
+  body {
+    @apply bg-[#f4f6f8] text-slate-900;
+  }
+}
+
+/* ===========================
+   GLASS UTILITIES (Light)
+   =========================== */
+@utility glass-card {
+  @apply bg-white/80 backdrop-blur-xl border border-slate-200 shadow-2xl;
+}
+
+@utility glass-nav {
+  @apply bg-[#f4f6f8]/90 backdrop-blur-md border-b border-slate-200/70;
+}
+
+/* ===========================
+   CSS VARIABLES
+   =========================== */
+:root {
+  --bg-ghost-grey: #f4f6f8;
+  --bg-card:       #ffffff;
+  --bg-panel:      rgba(255,255,255,0.72);
+  --border-light:  #e2e8f0;
+  --text-primary:  #0f172a;
+  --text-body:     #1e293b;
+  --text-muted:    #64748b;
+  --text-subtle:   #94a3b8;
+}
+
+/* ===========================
+   PAGE-LEVEL DARK BACKGROUNDS
+   (PaymentPage, RefundPaymentPage root wrappers)
+   =========================== */
+.bg-\[\#0b1120\] {
+  background-color: var(--bg-ghost-grey) !important;
+}
+
+/* bg-slate-950 — page roots & overlay backdrops */
+/* Keep semi-transparent versions (modals/overlays) dark */
+.bg-slate-950 {
+  background-color: var(--bg-ghost-grey) !important;
+}
+/* Modal overlay backdrops — keep dark */
+.bg-slate-950\/80 {
+  background-color: rgba(15, 23, 42, 0.75) !important;
+}
+.bg-slate-950\/95 {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+}
+.bg-slate-950\/90 {
+  background-color: rgba(15, 23, 42, 0.80) !important;
+}
+
+/* bg-slate-900 — card, modal, and section containers */
+.bg-slate-900 {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-light) !important;
+}
+/* bg-slate-900 with opacity — sidebar panels, hover highlights */
+.bg-slate-900\/50 {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+}
+.bg-slate-900\/40 {
+  background-color: rgba(248, 250, 252, 0.7) !important;
+}
+.bg-slate-900\/90 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+.bg-slate-900\/80 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+/* Mobile nav dropdown */
+.bg-slate-900\/95 {
+  background-color: rgba(255, 255, 255, 0.97) !important;
+}
+
+/* bg-slate-800 — darker card accents */
+.bg-slate-800 {
+  background-color: #f1f5f9 !important;
+}
+.bg-slate-800\/50 {
+  background-color: rgba(241, 245, 249, 0.85) !important;
+}
+
+/* ===========================
+   CARD PANEL BACKGROUNDS
+   (bg-white/5 etc. are nearly invisible on light bg)
+   =========================== */
+.bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  /* subtle white panel with enough contrast */
+}
+.bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+}
+
+/* ===========================
+   BORDER OVERRIDES
+   =========================== */
+.border-white\/5 {
+  border-color: rgba(203, 213, 225, 0.7) !important;
+}
+.border-white\/10 {
+  border-color: rgba(203, 213, 225, 0.85) !important;
+}
+.border-white\/20 {
+  border-color: rgba(148, 163, 184, 0.85) !important;
+}
+
+/* ===========================
+   TEXT COLOR OVERRIDES
+   Selectively darken light-theme text classes.
+   We protect:
+     - children of buttons
+     - children of colored bg elements
+     - gradient banners
+     - colored badges/alerts
+   =========================== */
+
+/* text-white: darken unless inside a colored context */
+.text-white:not(button *):not(a.bg-blue-600 *):not(a.bg-blue-500 *):not(.bg-blue-600 *):not(.bg-blue-500 *):not(.bg-blue-700 *):not(.bg-emerald-600 *):not(.bg-emerald-500 *):not(.bg-green-600 *):not(.bg-red-600 *):not(.bg-indigo-600 *):not(.bg-purple-600 *):not([class*="bg-gradient-"] *):not([class*="from-indigo"] *):not([class*="from-blue"] *):not(.bg-blue-600):not(.bg-emerald-600):not(button.bg-blue-600):not(button.bg-emerald-600) {
+  color: var(--text-primary) !important;
+}
+
+/* text-slate-200: the default body text on payment pages */
+.text-slate-200:not(button *):not(.bg-blue-600 *):not(.bg-emerald-600 *):not(.bg-red-600 *) {
+  color: var(--text-body) !important;
+}
+
+/* text-slate-100 */
+.text-slate-100:not(button *):not(.bg-blue-600 *):not(.bg-emerald-600 *):not(.bg-red-600 *) {
+  color: var(--text-body) !important;
+}
+
+/* text-slate-300 */
+.text-slate-300:not(button *):not(.bg-blue-600 *):not(.bg-emerald-600 *):not(.bg-red-600 *) {
+  color: #334155 !important;
+}
+
+/* text-slate-400: secondary body text */
+.text-slate-400:not(button *):not(.bg-blue-600 *):not(.bg-emerald-600 *):not(.bg-red-600 *) {
+  color: var(--text-muted) !important;
+}
+
+/* text-slate-500: muted / captions */
+.text-slate-500:not(button *):not(.bg-blue-600 *):not(.bg-emerald-600 *):not(.bg-red-600 *) {
+  color: #64748b !important;
+}
+
+/* ===========================
+   GLASS CARD TEXT RESET
+   =========================== */
+.glass-card h1,
+.glass-card h2,
+.glass-card h3,
+.glass-card h4,
+.glass-card h5,
+.glass-card h6 {
+  color: var(--text-primary) !important;
+}
+.glass-card .text-white {
+  color: var(--text-primary) !important;
+}
+.glass-card .text-slate-100,
+.glass-card .text-slate-200 {
+  color: var(--text-body) !important;
+}
+.glass-card .text-slate-300,
+.glass-card .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+
+/* ===========================
+   HEADING OVERRIDES
+   =========================== */
+h1:not(button *):not(.bg-blue-600 *):not(.bg-blue-500 *):not(.bg-red-600 *):not(.bg-emerald-600 *),
+h2:not(button *):not(.bg-blue-600 *):not(.bg-blue-500 *):not(.bg-red-600 *):not(.bg-emerald-600 *),
+h3:not(button *):not(.bg-blue-600 *):not(.bg-blue-500 *):not(.bg-red-600 *):not(.bg-emerald-600 *),
+h4:not(button *):not(.bg-blue-600 *):not(.bg-blue-500 *):not(.bg-red-600 *):not(.bg-emerald-600 *),
+h5:not(button *):not(.bg-blue-600 *):not(.bg-blue-500 *):not(.bg-red-600 *):not(.bg-emerald-600 *),
+h6:not(button *):not(.bg-blue-600 *):not(.bg-blue-500 *):not(.bg-red-600 *):not(.bg-emerald-600 *) {
+  color: var(--text-primary) !important;
+}
+
+/* ===========================
+   HOVER TEXT LINKS
+   =========================== */
+.hover\:text-white:not(button):not(button *):not(.bg-blue-600 *):hover {
+  color: #2563eb !important;
+}
+.text-slate-300.hover\:text-blue-400:hover {
+  color: #2563eb !important;
+}
+
+/* ===========================
+   INPUT / FORM ELEMENTS
+   =========================== */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="range"]),
+select,
+textarea {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: var(--text-primary) !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="range"]):focus,
+select:focus,
+textarea:focus {
+  background-color: #ffffff !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+  outline: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ===========================
+   NAVBAR & MOBILE DROPDOWN
+   =========================== */
+nav.glass-nav .text-slate-300,
+nav.glass-nav .text-slate-200 {
+  color: #475569 !important;
+}
+nav.glass-nav .text-slate-400 {
+  color: #64748b !important;
+}
+/* Navbar brand */
+nav .text-xl.text-white {
+  color: var(--text-primary) !important;
+}
+
+/* Mobile menu links */
+.md\:hidden a.text-slate-300,
+.md\:hidden .text-slate-300 {
+  color: #334155 !important;
+}
+
+/* ===========================
+   LEAFLET MAP POPUP
+   =========================== */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background-color: #ffffff !important;
+  color: var(--text-body) !important;
+}
+
+/* ===========================
+   PRINT STYLES
+   =========================== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #receipt-modal, #receipt-modal * {
+    visibility: visible;
+  }
+  #receipt-modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    background: white;
+    color: black;
+  }
+  .print-hide {
+    display: none !important;
+  }
+}

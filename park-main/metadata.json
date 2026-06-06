@@ -1,0 +1,5 @@
+{
+  "name": "ParkSmart",
+  "description": "A smart parking finder application with real-time search, navigation, and booking.",
+  "requestFramePermissions": ["geolocation"]
+}

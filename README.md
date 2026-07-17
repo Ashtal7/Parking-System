@@ -145,7 +145,7 @@ Add screenshots of the following pages:
 - Lot Listing Page
   ![Lot Listing](Lot%20Listing.png)
 - Owner Dashboard
-  ![Owner Dashboard](Owner%20Dashboard)
+  ![Owner Dashboard](Owner%20Dashboard.png)
 
 ---
 

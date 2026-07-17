@@ -131,12 +131,21 @@ Add screenshots of the following pages:
 - Home Page
   ![Home page](Home%20Page.png)
 - Login Page
+  ![Login](Login.png)
 - Registration Page
-- User Dashboard
+  ![Register](Register.png)
+- Search Page
+  ![Searching](Searching.png)
 - Parking Slot Booking
+  ![Booking](Booking.png)
+- Payment Page
+  ![Payment](Payment.png)
 - Booking History
+  ![Booking History](Booking%20History.png)
 - Lot Listing Page
+  ![Lot Listing](Lot%20Listing.png)
 - Owner Dashboard
+  ![Owner Dashboard](Owner%20Dashboard)
 
 ---
 

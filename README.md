@@ -129,7 +129,7 @@ The **Smart Parking Reservation System** is a web-based application designed to 
 Add screenshots of the following pages:
 
 - Home Page
-  ![Home page](Home Page.png)
+  ![Home page](Home%20Page.png)
 - Login Page
 - Registration Page
 - User Dashboard
